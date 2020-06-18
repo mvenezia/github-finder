@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Navbar from './components/layout/Navbar'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Users from './components/users/Users'
 import Search from './components/users/Search'
 import Alert from './components/layout/Alert'
@@ -10,7 +11,7 @@ class App extends Component {
   state = {
     users: [],
     loading: false,
-    alert: { msg: '', type: '' }
+    alert: null
   }
 
   searchUsers = async userSearch => {
@@ -33,6 +34,7 @@ class App extends Component {
 
   setAlert = (msg, type) => {
     this.setState({ alert: { msg, type }})
+    setTimeout(() => {this.setState({ alert: null })}, 5000)
   }
   
   render() {
@@ -42,14 +44,23 @@ class App extends Component {
     } = this.state
 
     return (
+      <Router>
       <div className='App'>
         <Navbar />
         <div className='container'>
           <Alert alert={this.state.alert}/>
-          <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.shouldShowClear()} setAlert={this.setAlert} />
-          <Users loading={loading} users={users} />
+          <Switch>
+            <Route exact path='/' render={props => (
+              <Fragment>
+                <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.shouldShowClear()} setAlert={this.setAlert} />
+                <Users loading={loading} users={users} />
+              </Fragment>
+            )}
+            />
+          </Switch>
         </div>
       </div>
+      </Router>
     );
   }
 }
