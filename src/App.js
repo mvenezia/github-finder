@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Users from './components/users/Users'
 import Search from './components/users/Search'
 import Alert from './components/layout/Alert'
+import About from './components/layout/About'
 import axios from 'axios'
 import './App.css';
 
@@ -48,15 +49,16 @@ class App extends Component {
       <div className='App'>
         <Navbar />
         <div className='container'>
-          <Alert alert={this.state.alert}/>
           <Switch>
             <Route exact path='/' render={props => (
               <Fragment>
+                <Alert alert={this.state.alert} />
                 <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.shouldShowClear()} setAlert={this.setAlert} />
                 <Users loading={loading} users={users} />
               </Fragment>
             )}
             />
+            <Route exact path='/about' component={About} />
           </Switch>
         </div>
       </div>
