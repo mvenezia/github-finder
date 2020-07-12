@@ -5,7 +5,7 @@ import Users from './components/users/Users'
 import User from './components/users/User'
 import Search from './components/users/Search'
 import Alert from './components/layout/Alert'
-import About from './components/layout/About'
+import About from './components/pages/About'
 import axios from 'axios'
 import './App.css';
 
@@ -72,10 +72,9 @@ class App extends Component {
             )}
             />
             <Route exact path='/about' component={About} />
-            <Route exact path='/user/:login' render={props => (
+            <Route exact path='/user/:username' render={props => (
               <User {...props} getUser={this.getUser} user={user} loading={loading}/>
             )}>
-
             </Route>
           </Switch>
         </div>
