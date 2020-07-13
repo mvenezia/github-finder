@@ -21,8 +21,8 @@ export class User extends Component {
 
         const {
             name,
-            avatar,
-            url,
+            company,
+            avatar_url,
             location,
             bio,
             blog,
@@ -42,16 +42,69 @@ export class User extends Component {
         return (
             <Fragment>
                 <Link
-                    to={'/'}
-                    className={'btn btn-light'}
+                    to='/'
+                    className='btn btn-light'
                 >
                     Back To Search
                 </Link>
                 Hireable: {' '}
                 {
-                    hireable ? <i className="fas fa-check text-success" />
+                    hireable ? <i className='fas fa-check text-success' />
                     : <i className='fas fa-times-circle text-danger' />
-                }     
+                }
+                <div className='card grid-2'>
+                    <div className='all-center'>
+                        <img
+                            src={avatar_url}
+                            className='round-img'
+                            alt='Avatar'
+                            style={{ width: '150px' }}
+                        />
+                        <h1>{ name }</h1>
+                        <p>Location: { location }</p>
+                    </div>
+                    <div>
+                        {
+                            bio &&
+                            <Fragment>
+                                <h3>Bio</h3>
+                                <p>{bio}</p>
+                            </Fragment>
+                        }
+                        <a href={html_url} className='btn btn-dark my-1'>Visit Github Profile</a>
+                        <ul>
+                            <li>
+                                {
+                                login &&
+                                <Fragment>
+                                    Username: { login }
+                                </Fragment>
+                                }
+                            </li>
+                            <li>
+                                {
+                                    company &&
+                                    <Fragment>
+                                        Company: {company}
+                                    </Fragment>
+                                }
+                            </li>
+                            <li>
+                                {
+                                    blog &&
+                                    <Fragment>
+                                        Website: {blog}
+                                    </Fragment>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className='badge badge-primary'>Followers: {followers}</div>
+                <div className='badge badge-primary'>Following: {following}</div>
+                <div className='badge badge-primary'>Public Repos: {public_repos}</div>
+                <div className='badge badge-primary'>Followers: {public_gists}</div>
+                </div>    
             </Fragment>
         )
     }
